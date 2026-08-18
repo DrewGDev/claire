@@ -6,6 +6,10 @@ class ChatService:
     def __init__(self) -> None:
         self.llm = get_llm()
 
+        self.system_prompt = """
+        Você é um chatbot por CLI, está em um terminal, chamada Claire
+        """
+
     def invoke_ai_response(self, query: str) -> str:
         if not self.llm:
             raise ValueError("LLM model not initialized")
@@ -14,7 +18,7 @@ class ChatService:
 
         agent = create_agent(
             self.llm,
-            system_prompt="Você é um chatbot por CLI, está em um terminal, chamada Claire"
+            system_prompt=self.system_prompt
         )
 
         result = agent.invoke(
