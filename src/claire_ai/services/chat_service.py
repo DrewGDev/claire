@@ -1,5 +1,6 @@
 from claire_ai.utils.utils import get_llm
-from langchain.messages import HumanMessage, SystemMessage
+from langchain.messages import HumanMessage
+from langchain.agents import create_agent
 
 class ChatService:
     def __init__(self) -> None:
@@ -10,17 +11,17 @@ class ChatService:
             raise ValueError("LLM model not initialized")
         if query.strip() == "":
             raise ValueError("Query can't be empty")
-    
-        # validar query
 
-        messages = [
-            SystemMessage("Você é um chatbot por CLI, terminal, chamada Claire. Responda agradavelmente."),
-            HumanMessage(query)
-        ]
+        agent = create_agent(
+            self.llm,
+            system_prompt="Você é um chatbot por CLI, está em um terminal, chamada Claire"
+        )
 
-        result = self.llm.invoke(messages)
+        result = agent.invoke(
+            {"messages": [HumanMessage(query)]}
+        )
 
-        content = result.content
+        content = result["messages"][-1].content
 
         if isinstance(content, list):
             content = content[0].get("text", "")

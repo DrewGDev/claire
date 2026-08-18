@@ -1,12 +1,12 @@
 import os
 import typer
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 from claire_ai.services.auth_service import AuthService
 
 from claire_ai.types.chat import chat_app
 
-load_dotenv()
+load_dotenv(find_dotenv())
 
 app = typer.Typer()
 
@@ -40,13 +40,13 @@ def configure():
         typer.echo(f"Conectando à API com a chave: {api_key[:4]}********")
         auth_service = AuthService()
         if auth_service.configure_environment(api_key, provider_model, llm_model):
-            typer.echo("Configuração sucedida!")
+            typer.echo(f"Configuração sucedida! API_KEY: {api_key[:4]}...")
             return
         typer.echo("Configuração mal-sucedida", err=True)
 
 @app.command()
 def hello(name: str):
-    print(f"Hello {name}")
+    typer.echo(f"Hello {name}")
 
 if __name__ == "__main__":
     app()
