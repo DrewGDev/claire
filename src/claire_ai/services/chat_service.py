@@ -1,10 +1,11 @@
-from claire_ai.utils.utils import get_llm
+
+from langchain.chat_models import BaseChatModel
 from langchain.messages import HumanMessage
 from langchain.agents import create_agent
 
 class ChatService:
-    def __init__(self) -> None:
-        self.llm = get_llm()
+    def __init__(self, llm: BaseChatModel) -> None:
+        self.llm = llm
 
         self.system_prompt = """
         Você é um chatbot por CLI, está em um terminal, chamada Claire

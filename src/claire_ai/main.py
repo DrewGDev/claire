@@ -5,12 +5,14 @@ from dotenv import load_dotenv, find_dotenv
 from claire_ai.services.auth_service import AuthService
 
 from claire_ai.types.chat import chat_app
+from claire_ai.types.config import config_app
 
 load_dotenv(find_dotenv())
 
 app = typer.Typer()
 
 app.add_typer(chat_app)
+app.add_typer(config_app)
 
 @app.callback(invoke_without_command=True)
 def process_api(
