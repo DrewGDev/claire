@@ -179,7 +179,7 @@ wheels = [
 
 [[package]]
 name = "claire-ai"
-version = "0.1.0"
+version = "0.1.2"
 source = { editable = "." }
 dependencies = [
     { name = "langchain" },

@@ -6,7 +6,7 @@ It works like a integration of `langchain` agent in your terminal.
 
 From dev to devs :)
 
-## Instalation
+## Installation
 
 You can use Claire on-the-fly without permanently installing it, or install it globally on your system. We recommend using `uv` or `pipx` for isolated and safe installations.
 

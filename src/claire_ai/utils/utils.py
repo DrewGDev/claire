@@ -7,7 +7,7 @@ from langchain.chat_models import init_chat_model
 from dotenv import load_dotenv, find_dotenv
 from pydantic import SecretStr
 
-load_dotenv(find_dotenv())
+load_dotenv(find_dotenv(".claire_env"))
 
 API_KEY = SecretStr(os.getenv("API_KEY"))
 PROVIDER_MODEL = os.getenv("PROVIDER_MODEL")
