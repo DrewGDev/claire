@@ -6,6 +6,43 @@ It works like a integration of `langchain` agent in your terminal.
 
 From dev to devs :)
 
+## Instalation
+
+You can use Claire on-the-fly without permanently installing it, or install it globally on your system. We recommend using `uv` or `pipx` for isolated and safe installations.
+
+### Try it without installing (On-the-fly)
+If you have [uv](https://docs.astral.sh/uv/) installed, you can run Claire instantly, just like `npx`:
+
+```
+uvx claire-ai
+```
+
+### Global Installation (Recommended)
+
+Using `uv`:
+```
+uv tool install claire-ai
+```
+
+Using `pipx`:
+```
+pipx install claire-ai
+```
+
+Using standard `pip`:
+```
+pip install claire-ai
+```
+> Make sure to use a virtual environment if you choose this method.
+
+---
+
+Once installed, Claire will be available globally in your terminal. You can start using it simply by typing:
+```
+claire-ai --help
+```
+
+
 ## Commands
 
 ### 1. `configure`
