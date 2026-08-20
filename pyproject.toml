@@ -1,7 +1,7 @@
 [project]
 name = "claire-ai"
 version = "0.1.0"
-description = "Add your description here"
+description = "An assistent with AI of your choice in your terminal."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 [project.scripts]
-claire-ai = "claire_ai.main:app"
+claire = "claire_ai.main:app"
 
 [build-system]
 requires = ["uv_build>=0.11.3,<0.12.0"]
