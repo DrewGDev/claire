@@ -9,7 +9,7 @@ class AuthService:
 
     def configure_environment(self, api_key: str, provider_model: str, llm_model: str) -> bool:
         if not api_key or not provider_model or not llm_model:
-            raise ValueError("configuração de variáveis de ambiente precisam de campos não nulos.")
+            raise ValueError("Environment variables need to be a non empty value.")
 
         if not os.path.exists(".env"):
             with open(".env", "w") as f:

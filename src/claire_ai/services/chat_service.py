@@ -8,7 +8,7 @@ class ChatService:
         self.llm = llm
 
         self.system_prompt = """
-        Você é um chatbot por CLI, está em um terminal, chamada Claire
+        You are a chatbot by CLI, in a terminal, named Claire
         """
 
     def invoke_ai_response(self, query: str) -> str:

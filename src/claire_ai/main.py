@@ -1,4 +1,5 @@
 import os
+from typing import Annotated
 import typer
 from dotenv import load_dotenv, find_dotenv
 
@@ -20,7 +21,7 @@ def process_api(
     api_key: str | None = typer.Option(None, envvar="API_KEY", hidden=True)
 ):
     """
-    Callback para processar as variáveis de ambiente.
+    Callback for processing environment variables.
     """
     if ctx.invoked_subcommand == "configure":
         return
@@ -30,21 +31,23 @@ def process_api(
         configure()
 
 @app.command()
-def configure():
+def configure(api_key: Annotated[str, typer.Option(prompt="Digite sua API Key", hide_input=True)] = "",
+              provider_model: Annotated[str, typer.Option(prompt="Digite o provedor de llm")] = "",
+              llm_model: Annotated[str, typer.Option(prompt="Digite o modelo da LLM")] = ""):
     """
-    Comando principal que precisa de autenticação.
+    Principal command for Claire to works.
     """
-    api_key = typer.prompt("Digite sua API Key", hide_input=True)
-    provider_model = typer.prompt("Digite o provedor de llm")
-    llm_model = typer.prompt("Digite o modelo da LLM")
-
+    if api_key.strip() == "" and provider_model.strip() == "" and llm_model.strip() == "":
+        api_key = typer.prompt("Input your API Key", hide_input=True)
+        provider_model = typer.prompt("Input your model provider")
+        llm_model = typer.prompt("Input your llm model")
     if api_key and provider_model and llm_model:
-        typer.echo(f"Conectando à API com a chave: {api_key[:4]}********")
+        typer.echo(f"Connecting the API with the key: {api_key[:4]}********")
         auth_service = AuthService()
         if auth_service.configure_environment(api_key, provider_model, llm_model):
-            typer.echo(f"Configuração sucedida! API_KEY: {api_key[:4]}...")
+            typer.echo(f"Successful configuration! API_KEY: {api_key[:4]}...")
             return
-        typer.echo("Configuração mal-sucedida", err=True)
+        typer.echo("Error during configuration", err=True)
 
 @app.command()
 def hello(name: str):
