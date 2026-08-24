@@ -3,6 +3,10 @@ from typing import Annotated
 import typer
 import click
 
+from prompt_toolkit import prompt as tk_prompt
+from prompt_toolkit.styles import Style
+from prompt_toolkit.formatted_text import FormattedText
+
 from rich import print as rich_print
 from rich.panel import Panel
 from rich.markdown import Markdown
@@ -16,13 +20,30 @@ from claire_ai.types.config import install_dependency
 chat_app = typer.Typer()
 
 @chat_app.command()
-def chat(query: Annotated[str, typer.Option(prompt="Ask me anything")],
+def chat(query: Annotated[str, typer.Option(help="Query to be asked to AI")] = None,
          copy: Annotated[bool, typer.Option(help="Permission to copy AI response automatically.")] = False):
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
         transient=True,
     ) as progress:
+        progress.stop()
+
+        while not query or query.strip() == "":
+            query = tk_prompt(
+                FormattedText([
+                    ('class:prompt_prefix', '╭─ Ask Claire \n╰─➤ '),
+                ]), 
+                multiline=True,
+                style=Style.from_dict({
+                        'prompt_prefix': 'bold #73E6AD',
+                        'user_input': '#ffffff',
+                        'bottom_toolbar': 'bg:#2b2b2b #aaaaaa italic', 
+                    }),
+                bottom_toolbar="You can paste code in here, it's multiline!\nPress [Alt + Enter] or [Esc, then Enter] to submit.\nPress [Ctrl + C] to exit."
+                )
+        
+        progress.start()
         thinking_progress = progress.add_task(description="Thinking...", total=None)
         chat_service = ChatService()    
 
