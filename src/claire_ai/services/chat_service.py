@@ -4,21 +4,19 @@ from langchain.messages import HumanMessage
 from langchain.agents import create_agent
 
 class ChatService:
-    def __init__(self, llm: BaseChatModel) -> None:
-        self.llm = llm
-
+    def __init__(self) -> None:
         self.system_prompt = """
         You are a chatbot by CLI, in a terminal, named Claire
         """
 
-    def invoke_ai_response(self, query: str) -> str:
-        if not self.llm:
+    def invoke_ai_response(self, llm: BaseChatModel, query: str) -> str:
+        if not llm:
             raise ValueError("LLM model not initialized")
         if query.strip() == "":
             raise ValueError("Query can't be empty")
 
         agent = create_agent(
-            self.llm,
+            llm,
             system_prompt=self.system_prompt
         )
 

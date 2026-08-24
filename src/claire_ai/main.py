@@ -8,7 +8,7 @@ from claire_ai.services.auth_service import AuthService
 from claire_ai.types.chat import chat_app
 from claire_ai.types.config import config_app
 
-load_dotenv(find_dotenv(filename=".claire_env"))
+load_dotenv(find_dotenv(filename=".env_claire"))
 
 app = typer.Typer()
 

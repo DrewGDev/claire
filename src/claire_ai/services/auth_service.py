@@ -5,7 +5,7 @@ load_dotenv()
 
 class AuthService:
     def __init__(self) -> None:
-        self.dotenv_path: str = ".claire_env"
+        self.dotenv_path: str = ".env_claire"
 
     def configure_environment(self, api_key: str, provider_model: str, llm_model: str) -> bool:
         if not api_key or not provider_model or not llm_model:

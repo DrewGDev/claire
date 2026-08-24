@@ -62,6 +62,7 @@ Command to start conversation with Claire, just ask your query and Claire will p
 
 - **Options**:
     - **--query** (str): Query used to ask Claire.
+    - **--copy** (bool): Permission to copy AI response automatically.
 
 > Obs.: Depeding on the provider that you configure, maybe, some dependencies are going to be requested. All from `langchain` chat models.
 
